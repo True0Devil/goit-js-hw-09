@@ -42,6 +42,12 @@ class Timer {
     this.intervalId = setInterval(() => {
       const currentTime = Date.now();
       const countdownTime = this.convertMs(selectedTime - currentTime);
+
+      if (selectedTime - currentTime < 0) {
+        clearInterval(this.intervalId);
+        return;
+      }
+
       this.onTick(countdownTime);
     }, 1000);
   }
